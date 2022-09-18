@@ -1,3 +1,4 @@
+from urllib import request
 import requests
 import api_key
 
@@ -11,14 +12,18 @@ def weather_by_city(city_name):
         "num_of_days": 1,
         "lang": "ru"
     }
-    result = requests.get(weather_url, params=params)
-    weather = result.json()  # weather
-    if 'data' in weather:
-        if 'current_condition' in weather['data']:
-            try:
-                return weather['data']['current_condition'][0]
-            except (IndexError, TypeError):
-                return False
+    try:
+        result = requests.get(weather_url, params=params) # сходить на сервер 
+        result.raise_for_status()
+        weather = result.json()  # вернуть результат
+        if 'data' in weather:
+            if 'current_condition' in weather['data']:
+                try:
+                    return weather['data']['current_condition'][0]
+                except (IndexError, TypeError):
+                    return False
+    except (requests.RequestException):
+        print("Сетевая ошибка")
     return False
 
 
