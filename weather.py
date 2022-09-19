@@ -22,7 +22,7 @@ def weather_by_city(city_name):
                     return weather['data']['current_condition'][0]
                 except (IndexError, TypeError):
                     return False
-    except (requests.RequestException):
+    except (requests.RequestException, ValueError):
         print("Сетевая ошибка")
     return False
 
