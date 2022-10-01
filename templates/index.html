@@ -3,6 +3,12 @@
             <title>{{page_title}}</title>
         </head>
         <body>
-            <h1>{{weather_text}}</h1>
+            <h1>
+            {% if weather %}
+                Погода: {{ weather.temp_C }}, ощущается как {{ weather.FeelsLikeC }}
+            {% else %}
+                Сервис погоды временно недоступен
+            {% endif %}
+            </h1>
         </body>
     </html>
