@@ -14,7 +14,7 @@ def index():
     else:
         weather_text ="Сервис временно недоступен "
 
-    return render_template('index.html', page_title=page_title, weather_text=weather_text)
+    return render_template('index.html', page_title=page_title, weather=weather)
 
 if __name__ == "__main__":
     app.run()
